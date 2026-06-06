@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1>Sales Orders</h1>
+  <button mat-flat-button color="primary" type="button" (click)="openCreate()">
+    <mat-icon>add</mat-icon>
+    Add Sales Order
+  </button>
+</div>
+
+<mat-form-field appearance="outline" class="search-field">
+  <mat-label>Search sales orders</mat-label>
+  <input matInput type="search" (input)="onSearch($any($event.target).value)" aria-label="Search sales orders" />
+</mat-form-field>
+
+@if (loading()) {
+  <p>Loading sales orders...</p>
+} @else {
+  <table mat-table [dataSource]="filteredOrders()" aria-label="Sales orders list">
+    <ng-container matColumnDef="customerName">
+      <th mat-header-cell *matHeaderCellDef>Customer</th>
+      <td mat-cell *matCellDef="let row">{{ row.customerName }}</td>
+    </ng-container>
+    <ng-container matColumnDef="orderDate">
+      <th mat-header-cell *matHeaderCellDef>Order Date</th>
+      <td mat-cell *matCellDef="let row">{{ row.orderDate | date: 'mediumDate' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="totalAmount">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let row">{{ row.totalAmount | currency }}</td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button type="button" aria-label="Edit sales order" (click)="openEdit(row)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button type="button" aria-label="Delete sales order" (click)="deleteOrder(row)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+}

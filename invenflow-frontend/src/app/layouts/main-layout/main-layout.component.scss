@@ -1,0 +1,33 @@
+.layout-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 260px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-info {
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+a.active {
+  background: rgba(0, 0, 0, 0.08);
+}

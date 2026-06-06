@@ -1,0 +1,32 @@
+# Dependencies
+**/node_modules/
+
+# Build outputs
+**/dist/
+**/target/
+**/.angular/cache/
+**/out-tsc/
+
+# IDE
+**/.idea/
+*.iml
+
+# Environment & secrets
+**/.env
+**/.env.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archives (keep source only)
+*.zip
+
+# Java
+*.class
+*.jar
+!**/mvnw.jar

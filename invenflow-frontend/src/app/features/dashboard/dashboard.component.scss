@@ -1,0 +1,25 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0;
+}
+
+.table-card {
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+}
+
+mat-chip.warn {
+  background: #ffebee;
+  color: #c62828;
+}

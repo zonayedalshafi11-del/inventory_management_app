@@ -1,0 +1,692 @@
+openapi: 3.0.3
+info:
+  title: InvenFlow Inventory API
+  version: 0.0.1-SNAPSHOT
+  description: Generated from static analysis of invenflow-backend-main Spring Boot controllers.
+servers:
+  - url: http://localhost:8081/api
+    description: Local development
+security: []
+paths:
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Login (mock JWT)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthUser'
+        '401':
+          description: Invalid credentials
+  /users:
+    get:
+      tags: [Users]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags: [Users]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/{id}:
+    get:
+      tags: [Users]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags: [Users]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      tags: [Users]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Deleted
+  /products:
+    get:
+      tags: [Products]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      tags: [Products]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /products/{id}:
+    put:
+      tags: [Products]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    delete:
+      tags: [Products]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Deleted
+  /customers:
+    get:
+      tags: [Customers]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+    post:
+      tags: [Customers]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+  /customers/{id}:
+    put:
+      tags: [Customers]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    delete:
+      tags: [Customers]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Deleted
+  /suppliers:
+    get:
+      tags: [Suppliers]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier'
+    post:
+      tags: [Suppliers]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+  /suppliers/{id}:
+    put:
+      tags: [Suppliers]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+    delete:
+      tags: [Suppliers]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Deleted
+  /warehouses:
+    get:
+      tags: [Warehouses]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Warehouse'
+    post:
+      tags: [Warehouses]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Warehouse'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Warehouse'
+  /warehouses/{id}:
+    put:
+      tags: [Warehouses]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Warehouse'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Warehouse'
+    delete:
+      tags: [Warehouses]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Deleted
+  /inventory:
+    get:
+      tags: [Inventory]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inventory'
+    post:
+      tags: [Inventory]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inventory'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+  /inventory/{id}:
+    put:
+      tags: [Inventory]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inventory'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+    delete:
+      tags: [Inventory]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Deleted
+  /orders/purchase:
+    get:
+      tags: [Orders]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOrder'
+    post:
+      tags: [Orders]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+  /orders/purchase/{id}:
+    put:
+      tags: [Orders]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+    delete:
+      tags: [Orders]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Deleted
+  /orders/sales:
+    get:
+      tags: [Orders]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SalesOrder'
+    post:
+      tags: [Orders]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+  /orders/sales/{id}:
+    put:
+      tags: [Orders]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+    delete:
+      tags: [Orders]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Deleted
+  /payments:
+    get:
+      tags: [Payments]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payment'
+    post:
+      tags: [Payments]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /payments/purchase:
+    get:
+      tags: [Payments]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payment'
+  /payments/sales:
+    get:
+      tags: [Payments]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payment'
+  /payments/{id}:
+    delete:
+      tags: [Payments]
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '204':
+          description: Deleted
+  /stock/summary:
+    get:
+      tags: [Stock]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StockSummary'
+  /stock/transactions:
+    get:
+      tags: [Stock]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StockTransaction'
+  /stock/movements/{productId}:
+    get:
+      tags: [Stock]
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StockTransaction'
+components:
+  parameters:
+    IdPath:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+  schemas:
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 4
+    UserPermissions:
+      type: object
+      properties:
+        manageProducts: { type: boolean }
+        manageOrders: { type: boolean }
+        viewReports: { type: boolean }
+        manageUsers: { type: boolean }
+    AuthUser:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+        role: { type: string }
+        status: { type: string }
+        lastLogin: { type: string }
+        permissions:
+          $ref: '#/components/schemas/UserPermissions'
+        token: { type: string }
+    User:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        name: { type: string }
+        email: { type: string }
+        password: { type: string }
+        role: { type: string }
+        status: { type: string }
+        lastLogin: { type: string }
+        manageProducts: { type: boolean }
+        manageOrders: { type: boolean }
+        viewReports: { type: boolean }
+        manageUsers: { type: boolean }
+    Product:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        name: { type: string }
+        sku: { type: string }
+        category: { type: string }
+        costPrice: { type: number, format: double }
+        sellPrice: { type: number, format: double }
+        stock: { type: integer }
+        reorderLevel: { type: integer }
+        status: { type: string }
+        supplier: { type: string }
+    Customer:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        name: { type: string }
+        email: { type: string }
+        phone: { type: string }
+    Supplier:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        name: { type: string }
+        contactEmail: { type: string }
+        phone: { type: string }
+    Warehouse:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        name: { type: string }
+        location: { type: string }
+    Inventory:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        productId: { type: integer, format: int64 }
+        productName: { type: string }
+        warehouseId: { type: integer, format: int64 }
+        warehouseName: { type: string }
+        totalQuantity: { type: integer }
+    PurchaseOrderItem:
+      type: object
+      properties:
+        productId: { type: integer, format: int64 }
+        productName: { type: string }
+        quantity: { type: integer }
+        price: { type: number, format: double }
+    PurchaseOrder:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        supplier: { type: string }
+        orderDate: { type: string, format: date }
+        expectedDelivery: { type: string, format: date }
+        totalAmount: { type: number, format: double }
+        status: { type: string, enum: [Pending, RECEIVED] }
+        invoiceAttachment: { type: string }
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderItem'
+    SalesOrderItem:
+      type: object
+      properties:
+        productId: { type: integer, format: int64 }
+        productName: { type: string }
+        quantity: { type: integer }
+        price: { type: number, format: double }
+    SalesOrder:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        customerName: { type: string }
+        orderDate: { type: string, format: date }
+        totalAmount: { type: number, format: double }
+        status: { type: string, enum: [COMPLETED, CANCELLED, REFUNDED] }
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalesOrderItem'
+    CreatePaymentRequest:
+      type: object
+      required: [amount, method]
+      properties:
+        amount: { type: number, format: double }
+        method: { type: string, enum: [CASH, CARD, TRANSFER] }
+        purchaseOrderId: { type: integer, format: int64 }
+        salesOrderId: { type: integer, format: int64 }
+    Payment:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        amount: { type: number, format: double }
+        method: { type: string }
+        paymentDate: { type: string }
+        type: { type: string, enum: [PURCHASE, SALES] }
+        purchaseOrderId: { type: integer, format: int64 }
+        salesOrderId: { type: integer, format: int64 }
+        supplier: { type: string }
+        customerName: { type: string }
+        products:
+          type: array
+          items: { type: string }
+    StockSummary:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        name: { type: string }
+        sku: { type: string }
+        category: { type: string }
+        currentStock: { type: integer }
+        reorderLevel: { type: integer }
+        supplier: { type: string }
+        stockStatus: { type: string }
+    StockTransaction:
+      type: object
+      properties:
+        type: { type: string, enum: [IN, OUT] }
+        productId: { type: integer, format: int64 }
+        productName: { type: string }
+        quantity: { type: integer }
+        reference: { type: string }
+        counterparty: { type: string }
+        date: { type: string }
+    ApiError:
+      type: object
+      properties:
+        error: { type: string }

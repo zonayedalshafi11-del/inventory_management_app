@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h1>Warehouses</h1>
+  <button mat-flat-button color="primary" type="button" (click)="openCreate()">
+    <mat-icon>add</mat-icon>
+    Add Warehouse
+  </button>
+</div>
+
+<mat-form-field appearance="outline" class="search-field">
+  <mat-label>Search warehouses</mat-label>
+  <input matInput type="search" (input)="onSearch($any($event.target).value)" aria-label="Search warehouses" />
+</mat-form-field>
+
+@if (loading()) {
+  <p>Loading warehouses...</p>
+} @else {
+  <table mat-table [dataSource]="filteredWarehouses()" aria-label="Warehouses list">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef>Location</th>
+      <td mat-cell *matCellDef="let row">{{ row.location }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button type="button" aria-label="Edit warehouse" (click)="openEdit(row)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button type="button" aria-label="Delete warehouse" (click)="deleteWarehouse(row)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+}

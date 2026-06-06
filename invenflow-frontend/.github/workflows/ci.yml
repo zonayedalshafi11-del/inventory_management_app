@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: invenflow-frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: invenflow-frontend
+        run: npm ci
+
+      - name: Unit tests
+        working-directory: invenflow-frontend
+        run: npm run test:ci
+
+      - name: Production build
+        working-directory: invenflow-frontend
+        run: npm run build:prod
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: invenflow-frontend/dist/invenflow-frontend/browser
+
+  docker:
+    needs: build-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        working-directory: invenflow-frontend
+        run: docker build -t invenflow-frontend:${{ github.sha }} .

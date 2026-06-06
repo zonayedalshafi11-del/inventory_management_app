@@ -1,0 +1,66 @@
+<h1>Dashboard</h1>
+
+<div class="stats-grid">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Products</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="stat-value">{{ productCount() }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Purchase Orders</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="stat-value">{{ purchaseOrderCount() }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Sales Orders</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="stat-value">{{ salesOrderCount() }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<mat-card class="table-card">
+  <mat-card-header>
+    <mat-card-title>Low / Out of Stock Alerts</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if (loading()) {
+      <p>Loading...</p>
+    } @else if (lowStockItems().length === 0) {
+      <p>All products are adequately stocked.</p>
+    } @else {
+      <table mat-table [dataSource]="lowStockItems()" aria-label="Low stock products">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Product</th>
+          <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="currentStock">
+          <th mat-header-cell *matHeaderCellDef>Stock</th>
+          <td mat-cell *matCellDef="let row">{{ row.currentStock }}</td>
+        </ng-container>
+        <ng-container matColumnDef="reorderLevel">
+          <th mat-header-cell *matHeaderCellDef>Reorder Level</th>
+          <td mat-cell *matCellDef="let row">{{ row.reorderLevel }}</td>
+        </ng-container>
+        <ng-container matColumnDef="stockStatus">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-chip [class.warn]="row.stockStatus !== 'In Stock'">{{ row.stockStatus }}</mat-chip>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    }
+  </mat-card-content>
+</mat-card>
